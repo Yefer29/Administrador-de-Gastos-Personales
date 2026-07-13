@@ -7,7 +7,7 @@ Desarrollada como taller de la asignatura **Desarrollo de Aplicaciones Web**
 (NRC-93983) de UNIMINUTO, para practicar el despliegue de una aplicación en un
 servicio de hosting gratuito (**Vercel**).
 
-🔗 **App en línea:** _(pega aquí la URL que genere Vercel, ej. `https://administrador-de-gastos-personales.vercel.app`)_
+🔗 **App en línea:** https://administrador-de-gastos-personales.vercel.app/
 
 ## Funcionalidades
 
