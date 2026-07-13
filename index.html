@@ -1,13 +1,125 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>administrador-de-gastos-personales</title>
+    <meta
+      name="description"
+      content="Administrador de Gastos Personales: registra ingresos y gastos, consulta tu saldo y administra tus finanzas."
+    />
+    <title>Administrador de Gastos Personales</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="app">
+      <header class="app__header">
+        <div class="brand">
+          <span class="brand__logo" aria-hidden="true">$</span>
+          <div>
+            <h1>Administrador de Gastos Personales</h1>
+            <p>Controla tus ingresos y gastos de forma sencilla.</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Tarjetas de resumen -->
+      <section class="resumen" aria-label="Resumen financiero">
+        <article class="tarjeta tarjeta--saldo">
+          <span class="tarjeta__etiqueta">Saldo disponible</span>
+          <strong class="tarjeta__valor" id="saldo">$0</strong>
+        </article>
+        <article class="tarjeta tarjeta--ingreso">
+          <span class="tarjeta__etiqueta">Total ingresos</span>
+          <strong class="tarjeta__valor" id="totalIngresos">$0</strong>
+        </article>
+        <article class="tarjeta tarjeta--gasto">
+          <span class="tarjeta__etiqueta">Total gastos</span>
+          <strong class="tarjeta__valor" id="totalGastos">$0</strong>
+        </article>
+      </section>
+
+      <div class="contenido">
+        <!-- Formulario -->
+        <section class="panel panel--form" aria-label="Registrar movimiento">
+          <h2 id="tituloForm">Nuevo movimiento</h2>
+          <form id="formMovimiento" novalidate>
+            <input type="hidden" id="editId" value="" />
+
+            <div class="campo">
+              <span class="campo__label">Tipo</span>
+              <div class="segmento" role="radiogroup" aria-label="Tipo de movimiento">
+                <label class="segmento__opcion">
+                  <input type="radio" name="tipo" value="ingreso" checked />
+                  <span>Ingreso</span>
+                </label>
+                <label class="segmento__opcion">
+                  <input type="radio" name="tipo" value="gasto" />
+                  <span>Gasto</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="descripcion">Descripción</label>
+              <input
+                type="text"
+                id="descripcion"
+                placeholder="Ej: Salario, mercado, arriendo…"
+                maxlength="80"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="categoria">Categoría</label>
+              <select id="categoria" required></select>
+            </div>
+
+            <div class="campo campo--doble">
+              <div>
+                <label class="campo__label" for="monto">Monto (COP)</label>
+                <input type="number" id="monto" min="1" step="1" placeholder="0" required />
+              </div>
+              <div>
+                <label class="campo__label" for="fecha">Fecha</label>
+                <input type="date" id="fecha" required />
+              </div>
+            </div>
+
+            <p class="form__error" id="formError" role="alert" hidden></p>
+
+            <div class="form__acciones">
+              <button type="submit" class="btn btn--primario" id="btnGuardar">Agregar</button>
+              <button type="button" class="btn btn--secundario" id="btnCancelar" hidden>Cancelar</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Lista de movimientos -->
+        <section class="panel panel--lista" aria-label="Movimientos">
+          <div class="lista__barra">
+            <h2>Movimientos</h2>
+            <div class="filtros">
+              <input type="search" id="buscar" placeholder="Buscar…" aria-label="Buscar movimientos" />
+              <select id="filtroTipo" aria-label="Filtrar por tipo">
+                <option value="todos">Todos</option>
+                <option value="ingreso">Ingresos</option>
+                <option value="gasto">Gastos</option>
+              </select>
+              <select id="filtroCategoria" aria-label="Filtrar por categoría">
+                <option value="todos">Todas las categorías</option>
+              </select>
+            </div>
+          </div>
+          <div id="lista" class="lista"></div>
+        </section>
+      </div>
+
+      <footer class="app__footer">
+        <p>Los datos se guardan en tu navegador (LocalStorage). Curso: Desarrollo de Aplicaciones Web · UNIMINUTO.</p>
+      </footer>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
